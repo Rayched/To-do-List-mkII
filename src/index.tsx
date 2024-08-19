@@ -10,11 +10,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
     <RecoilRoot>
       <ThemeProvider theme={LightTheme}>
         <App />
       </ThemeProvider>
     </RecoilRoot>
-  </React.StrictMode>
 );

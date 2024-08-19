@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -15,8 +15,10 @@ const ToDoWrapper = styled.div`
     }
 `;
 
-/*
 function ToDoList(){
+    /*
+    //Before use react-hook-form
+
     const [ToDo, setToDo] = useState("");
     const [ToDoError, setToDoError] = useState("");
 
@@ -29,7 +31,6 @@ function ToDoList(){
         event.preventDefault();
         if(ToDo.length < 2){
             setToDoError("입력하신 일정을 확인해주세요. (최소 2 글자 이상)")
-            setToDo("");
         } else {
             console.log("submit", ToDo);
         }
@@ -38,7 +39,11 @@ function ToDoList(){
     return (
         <ToDoWrapper>
             <form onSubmit={onSubmit}>
-                <input onChange={onChange} value={ToDo} placeholder="일정을 적어주세요."/>
+                <input 
+                    onChange={onChange}
+                    value={ToDo} 
+                    placeholder="일정을 적어주세요."
+                />
                 <button>추가</button>
             </form>
             <div>
@@ -49,21 +54,22 @@ function ToDoList(){
             </div>
         </ToDoWrapper>
     );
-}*/
+    */
 
-function ToDoList(){
-    const {register} = useForm();
+   //After use react-hook-form
 
-    console.log(register("todo"));
+   const { register, watch } = useForm();
 
-    return (
-        <ToDoWrapper>
-            <form>
-                <input placeholder="일정을 입력해주세요."/>
-                <button>추가</button>
-            </form>
-        </ToDoWrapper>
-    );
+   console.log(watch());
+
+   return (
+    <ToDoWrapper>
+        <form>
+            <input {...register("ToDo")} placeholder="일정을 적어주세요."/>
+            <button>추가</button>
+        </form>
+    </ToDoWrapper>
+   );
 }
 
 export default ToDoList;
