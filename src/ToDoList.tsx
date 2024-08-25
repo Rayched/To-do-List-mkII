@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
+//Type's
+interface ToDo_Types {
+    ToDo: string;
+};
+
+//styled-components
 const ToDoWrapper = styled.div`
     display: flex;
     justify-content: center;
@@ -16,58 +22,28 @@ const ToDoWrapper = styled.div`
 `;
 
 function ToDoList(){
-    /*
-    //Before use react-hook-form
+    const [ToDos, setToDos] = useState("");
 
-    const [ToDo, setToDo] = useState("");
-    const [ToDoError, setToDoError] = useState("");
+    const { register, handleSubmit, setValue,  } = useForm<ToDo_Types>();
 
-    const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const {currentTarget: {value}} = event;
-        setToDo(value);
-    };
-
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if(ToDo.length < 2){
-            setToDoError("입력하신 일정을 확인해주세요. (최소 2 글자 이상)")
-        } else {
-            console.log("submit", ToDo);
-        }
-    };
-
-    return (
-        <ToDoWrapper>
-            <form onSubmit={onSubmit}>
-                <input 
-                    onChange={onChange}
-                    value={ToDo} 
-                    placeholder="일정을 적어주세요."
-                />
-                <button>추가</button>
-            </form>
-            <div>
-                {
-                    (ToDo === "" || ToDo.length < 2) 
-                    ? ToDoError : ToDo
-                }
-            </div>
-        </ToDoWrapper>
-    );
-    */
-
-   //After use react-hook-form
-
-   const { register, watch } = useForm();
-
-   console.log(watch());
+    const AddToDo = (data: ToDo_Types) => {
+        setToDos(data.ToDo);
+        setValue("ToDo", "");
+    }
 
    return (
     <ToDoWrapper>
-        <form>
-            <input {...register("ToDo")} placeholder="일정을 적어주세요."/>
+        <form onSubmit={handleSubmit(AddToDo)}>
+            <input {
+                ...register("ToDo" ,{ required: "일정을 입력해주세요."})} 
+                placeholder="오늘 일정을 적어주세요."
+            />
             <button>추가</button>
         </form>
+        <div>
+            <h3>추가된 일정</h3>
+            <span>{ToDos}</span>
+        </div>
     </ToDoWrapper>
    );
 }
