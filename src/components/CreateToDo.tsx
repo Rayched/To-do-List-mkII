@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import styled from "styled-components";
-import { ToDos_Atom } from "./atoms/ToDoAtoms";
+import { ToDo_State } from "./atoms/ToDoAtoms";
 
 interface I_ToDo {
     ToDo: string
@@ -10,7 +9,7 @@ interface I_ToDo {
 function CreateToDo(){
     const {register, handleSubmit, setValue} = useForm<I_ToDo>();
 
-    const setToDos = useSetRecoilState(ToDos_Atom);
+    const setToDos = useSetRecoilState(ToDo_State);
 
     const AddToDo = ({ToDo}: I_ToDo) => {
         setToDos((Old_ToDos) => [{

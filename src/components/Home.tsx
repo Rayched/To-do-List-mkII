@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CreateToDo from "./CreateToDo";
-import ToDoList from "./ToDos";
+import ToDoList from "./ToDoList";
 
 const Container = styled.div`
     display: flex;
