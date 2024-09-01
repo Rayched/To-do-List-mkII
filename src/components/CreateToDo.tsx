@@ -1,0 +1,36 @@
+import { useForm } from "react-hook-form";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import styled from "styled-components";
+import { ToDos_Atom } from "./atoms/ToDoAtoms";
+
+interface I_ToDo {
+    ToDo: string
+};
+
+function CreateToDo(){
+    const {register, handleSubmit, setValue} = useForm<I_ToDo>();
+
+    const setToDos = useSetRecoilState(ToDos_Atom);
+
+    const AddToDo = ({ToDo}: I_ToDo) => {
+        setToDos((Old_ToDos) => [{
+            id: Date.now(),
+            text: ToDo,
+            category: "To-Do"
+        }, ...Old_ToDos]);
+        setValue("ToDo", "");
+    }
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit(AddToDo)}>
+                <input {
+                    ...register("ToDo", {required: "일정을 입력하지 않았습니다."})
+                } placeholder="일정을 입력해주세요."/>
+                <button>추가</button>
+            </form>
+        </div>
+    );
+}
+
+export default CreateToDo;

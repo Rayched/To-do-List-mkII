@@ -1,7 +1,6 @@
 import React from 'react';
 import {createGlobalStyle} from "styled-components"
-import ToDoList from './ToDoList';
-import UserForm from './UserForm';
+import Home from './components/Home';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
@@ -61,7 +60,7 @@ function App(){
   return (
     <>
       <GlobalStyle />
-      <ToDoList />
+      <Home />
     </>
   );
 }
