@@ -1,5 +1,5 @@
-import { useRecoilValue } from "recoil";
-import { ToDo_Selector, ToDo_State } from "./atoms/ToDoAtoms";
+import { selector, useRecoilValue } from "recoil";
+import { ToDo_State, toDoSelector } from "./atoms/ToDoAtoms";
 import styled from "styled-components";
 import ToDo from "./ToDo";
 
@@ -43,13 +43,13 @@ const Test_ToDo = [
  * 2. 정확히 말하면 해당 To Do의 index를 알아야 한다.
  * 3. array method인 array.findIndex() 통해서 찾는다.
  */
+
 function ToDoList(){
     const ToDos = useRecoilValue(ToDo_State);
-    const ToDoSelector = useRecoilValue(ToDo_Selector);
-
-    console.log(ToDoSelector);
+    const selectorOutput = useRecoilValue(toDoSelector);
 
     console.log(ToDos);
+    console.log(selectorOutput);
 
     return (
         <ToDos_Wrap>
