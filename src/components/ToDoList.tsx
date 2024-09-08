@@ -15,28 +15,30 @@ const ToDos_Wrap = styled.div`
     }
 `;
 
-const Test_ToDo = [
-    {
-        "id": 1725342024581,
-        "text": "Test4",
-        "category": "To-Do"
-    },
-    {
-        "id": 1725342021260,
-        "text": "Test3",
-        "category": "To-Do"
-    },
-    {
-        "id": 1725342018727,
-        "text": "Test2",
-        "category": "To-Do"
-    },
-    {
-        "id": 1725342007166,
-        "text": "Test",
-        "category": "To-Do"
+const AllToDos = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 0px;
+
+    div {
+        align-items: center;
+        margin: 0px 5px;
+        padding: 3px;
     }
-]
+
+    h3 {
+        display: flex;
+        font-weight: bold;
+        justify-content: center;
+        margin: 3px 0px;
+        padding: 5px;
+    }
+
+    span {
+        display: block;
+    }
+`;
 
 /**
  * 1. 'id' 통해서 category 수정할 To Do 찾아야 한다.
@@ -45,42 +47,66 @@ const Test_ToDo = [
  */
 
 function ToDoList(){
-    const ToDos = useRecoilValue(ToDo_State);
-    const selectorOutput = useRecoilValue(toDoSelector);
-
-    console.log(ToDos);
-    console.log(selectorOutput);
+    const [toDo, Doing, Done] = useRecoilValue(toDoSelector);
 
     return (
         <ToDos_Wrap>
-            <h4>일정 목록</h4>
-            <ul>
-                {
-                    ToDos.map((todo) => {
-                        return (
-                            <div>
-                                <ToDo 
-                                    id={todo.id} 
-                                    text={todo.text} 
-                                    category={todo.category}
-                                />
-                            </div>
-                        )
-                        /**
-                         * <ToDo {...todo}/> 형식으로 축약해서 작성 가능
-                         * 
-                         * ToDos 배열의 todo 요소 하나하나가
-                         * ToDo 컴포넌트에서 요구하는 props와
-                         * ToDos 배열의 타입이 'I_ToDos'로 동일한 props 가지고 있기 때문이다.
-                         * 
-                         * 정리하는 시점에서 아직 이해하진 못했기에
-                         * 위의 형식으로 업데이트는 하지 않았다
-                         * 
-                         * 대신 이런 식으로 주석으로 메모를 남겨두도록 하겠다.
-                         */
-                    })
-                }
-            </ul>
+            <AllToDos>
+                <div>
+                    <h3>To Do</h3>
+                    <ul>
+                    {
+                        toDo.map((todo) => {
+                            return (
+                                <span>
+                                    <ToDo 
+                                        id={todo.id} 
+                                        text={todo.text} 
+                                        category={todo.category}
+                                    />  
+                                </span>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
+                <div>
+                    <h3>Doing</h3>
+                    <ul>
+                    {
+                        Doing.map((todo) => {
+                            return (
+                                <span>
+                                    <ToDo 
+                                        id={todo.id} 
+                                        text={todo.text} 
+                                        category={todo.category}
+                                    />  
+                                </span>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
+                <div>
+                    <h3>Done</h3>
+                    <ul>
+                    {
+                        Done.map((todo) => {
+                            return (
+                                <span>
+                                    <ToDo 
+                                        id={todo.id} 
+                                        text={todo.text} 
+                                        category={todo.category}
+                                    />  
+                                </span>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
+            </AllToDos>
         </ToDos_Wrap>
     );
 }
