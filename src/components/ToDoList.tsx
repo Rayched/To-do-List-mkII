@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { ToDo_State } from "./atoms/ToDoAtoms";
+import { ToDo_Selector, ToDo_State } from "./atoms/ToDoAtoms";
 import styled from "styled-components";
 import ToDo from "./ToDo";
 
@@ -15,8 +15,41 @@ const ToDos_Wrap = styled.div`
     }
 `;
 
+const Test_ToDo = [
+    {
+        "id": 1725342024581,
+        "text": "Test4",
+        "category": "To-Do"
+    },
+    {
+        "id": 1725342021260,
+        "text": "Test3",
+        "category": "To-Do"
+    },
+    {
+        "id": 1725342018727,
+        "text": "Test2",
+        "category": "To-Do"
+    },
+    {
+        "id": 1725342007166,
+        "text": "Test",
+        "category": "To-Do"
+    }
+]
+
+/**
+ * 1. 'id' 통해서 category 수정할 To Do 찾아야 한다.
+ * 2. 정확히 말하면 해당 To Do의 index를 알아야 한다.
+ * 3. array method인 array.findIndex() 통해서 찾는다.
+ */
 function ToDoList(){
     const ToDos = useRecoilValue(ToDo_State);
+    const ToDoSelector = useRecoilValue(ToDo_Selector);
+
+    console.log(ToDoSelector);
+
+    console.log(ToDos);
 
     return (
         <ToDos_Wrap>
