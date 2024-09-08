@@ -12,11 +12,14 @@ function CreateToDo(){
     const setToDos = useSetRecoilState(ToDo_State);
 
     const AddToDo = ({ToDo}: I_ToDo) => {
-        setToDos((Old_ToDos) => [{
-            id: Date.now(),
-            text: ToDo,
-            category: "To-Do"
-        }, ...Old_ToDos]);
+        setToDos((Old_ToDos) => [
+            ...Old_ToDos, 
+            {
+                id: Date.now(),
+                text: ToDo,
+                category: "To-Do"
+            }
+        ]);
         setValue("ToDo", "");
     }
 

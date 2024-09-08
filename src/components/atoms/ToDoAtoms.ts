@@ -16,11 +16,11 @@ export const toDoSelector = selector({
     key: "toDoSelector",
     get: ({get}) => {
         const toDos = get(ToDo_State);
-        /**
-         * ToDo_State의 모든 값을 받아오고
-         * 제대로 받아왔는 지 확인하기 위해서
-         * console에 toDos의 length 출력
-         */
-        return toDos.length;
+
+        return [
+            toDos.filter((toDo) => toDo.category === "To-Do"),
+            toDos.filter((toDo) => toDo.category === "Doing"),
+            toDos.filter((toDo) => toDo.category === "Done")
+        ];
     }
 });
