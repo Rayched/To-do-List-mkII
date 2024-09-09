@@ -47,63 +47,20 @@ const AllToDos = styled.div`
  */
 
 function ToDoList(){
-    const [toDo, Doing, Done] = useRecoilValue(toDoSelector);
+    const toDos = useRecoilValue(toDoSelector);
+
+    console.log(toDos);
 
     return (
         <ToDos_Wrap>
             <AllToDos>
                 <div>
-                    <h3>To Do</h3>
                     <ul>
-                    {
-                        toDo.map((todo) => {
-                            return (
-                                <span>
-                                    <ToDo 
-                                        id={todo.id} 
-                                        text={todo.text} 
-                                        category={todo.category}
-                                    />  
-                                </span>
+                        {
+                            toDos?.map((toDo) => 
+                                <ToDo id={toDo.id} text={toDo.text} category={toDo.category}/>
                             )
-                        })
-                    }
-                    </ul>
-                </div>
-                <div>
-                    <h3>Doing</h3>
-                    <ul>
-                    {
-                        Doing.map((todo) => {
-                            return (
-                                <span>
-                                    <ToDo 
-                                        id={todo.id} 
-                                        text={todo.text} 
-                                        category={todo.category}
-                                    />  
-                                </span>
-                            )
-                        })
-                    }
-                    </ul>
-                </div>
-                <div>
-                    <h3>Done</h3>
-                    <ul>
-                    {
-                        Done.map((todo) => {
-                            return (
-                                <span>
-                                    <ToDo 
-                                        id={todo.id} 
-                                        text={todo.text} 
-                                        category={todo.category}
-                                    />  
-                                </span>
-                            )
-                        })
-                    }
+                        }
                     </ul>
                 </div>
             </AllToDos>
