@@ -1,9 +1,17 @@
 import { atom, selector } from "recoil";
 
+export enum Categories {
+    ToDo = "ToDo",
+    Doing = "Doing",
+    Done = "Done"
+};
+
+//type categorys = "To-Do"|"Doing"|"Done";
+
 export interface I_ToDos {
     id: number;
     text: string;
-    category: "To-Do"|"Doing"|"Done";
+    category: Categories;
 }
 
 //전체 To Do 저장해두는 state (type: array[])
@@ -13,9 +21,9 @@ export const ToDo_State = atom<I_ToDos[]>({
 });
 
 //사용자가 선택한 category를 기억해두는 state
-export const categoryState = atom({
+export const categoryState = atom<Categories>({
     key: "category",
-    default: "To-Do"
+    default: Categories.ToDo
 })
 
 export const toDoSelector = selector({

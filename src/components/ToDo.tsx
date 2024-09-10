@@ -1,7 +1,7 @@
 //To Do, 일정 Component
 
 import styled from "styled-components";
-import { I_ToDos, ToDo_State } from "./atoms/ToDoAtoms";
+import { Categories, I_ToDos, ToDo_State } from "./atoms/ToDoAtoms";
 import { useSetRecoilState } from "recoil";
 
 const ToDo_box = styled.div`
@@ -45,7 +45,7 @@ function ToDo({id, text, category}: I_ToDos){
              * To Do의 index를 찾아냈다. 
              * 그리고 찾아온 index를 TargetIndex 변수에 저장해둔다.
              */
-            const newToDo = {id, text, category: name as any};
+            const newToDo = {id, text, category: name as Categories};
 
             console.log(TargetIndex, newToDo);
 
@@ -96,14 +96,14 @@ function ToDo({id, text, category}: I_ToDos){
                 <li>{text}</li>
             </span>
             <span>
-                {category !== "To-Do" && (
-                    <button name="To-Do" onClick={Change_Categorys}>To Do</button>
+                {category !== Categories.ToDo && (
+                    <button name={Categories.ToDo} onClick={Change_Categorys}>To Do</button>
                 )}
-                {category !== "Doing" && (
-                    <button name="Doing" onClick={Change_Categorys}>Doing</button>
+                {category !== Categories.Doing && (
+                    <button name={Categories.Doing} onClick={Change_Categorys}>Doing</button>
                 )}
-                {category !== "Done" && (
-                    <button name="Done" onClick={Change_Categorys}>Done</button>
+                {category !== Categories.Done && (
+                    <button name={Categories.Done} onClick={Change_Categorys}>Done</button>
                 )}
             </span>
         </ToDo_box>

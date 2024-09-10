@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CreateToDo from "./CreateToDo";
 import ToDoList from "./ToDoList";
 import { useRecoilState } from "recoil";
-import { categoryState } from "./atoms/ToDoAtoms";
+import { Categories, categoryState } from "./atoms/ToDoAtoms";
 
 const Container = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ function Home(){
 
     const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
         const {currentTarget: {value}} = event;
-        setCategory(value);
+        setCategory(value as any);
     };
 
     console.log(Category);
@@ -32,10 +32,10 @@ function Home(){
             <h2>To Do List</h2>
             <CreateToDo />
             <form>
-                <select onInput={onInput}>
-                    <option value="To-Do">To Do</option>
-                    <option value="Doing">Doing</option>
-                    <option value="Done">Done</option>
+                <select value={Category} onInput={onInput}>
+                    <option value={Categories.ToDo}>To Do</option>
+                    <option value={Categories.Doing}>Doing</option>
+                    <option value={Categories.Done}>Done</option>
                 </select>
             </form>
             <ToDoList />
